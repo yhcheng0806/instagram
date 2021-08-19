@@ -10,8 +10,6 @@ import "./styles/app.css";
 
 const store = createStore(reducers,compose(applyMiddleware(thunk)));
 
-export default store;
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

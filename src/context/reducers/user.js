@@ -1,7 +1,7 @@
 import { LOGIN } from "../../constants/actionTypes";
 
 const initState = {
-  userInfo: null,
+  avatar: null,
 };
 
 const userReducer = (state = initState, { type, pauload }) => {

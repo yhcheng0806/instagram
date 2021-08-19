@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Loading = () => {
+const Loader = () => {
   return (
     <div>
-      loading...
+      111
     </div>
   )
 }
 
-export default Loading
+export default Loader
 

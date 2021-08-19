@@ -1,7 +1,12 @@
-const Home = () => {
+import React from "react";
+import { useSelector } from "react-redux";
+
+const Home = (props) => {
+  const state = useSelector(state => state)
+  console.log(props,state, "--props");
   return (
     <div className="home-wrapper">
-      <div className='box'></div> 
+      <div className="box"></div>
       {/* <div className=" transform transition hover:scale-110 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden sm:max-w-2xl">
         <div className="md:flex">
           <div className="md:flex-shrink-0">

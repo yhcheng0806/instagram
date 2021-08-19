@@ -1,12 +1,11 @@
 import React from 'react'
 
-const Loading = () => {
+const Error = () => {
   return (
     <div>
-      loading...
+      Error
     </div>
   )
 }
 
-export default Loading
-
+export default Error

@@ -1,15 +1,20 @@
-import React, { lazy, Suspense } from "react";
-import { Route } from "react-router-dom";
-import Loading from "../pages/loading";
+import React from "react";
+import { Redirect } from "react-router-dom";
+import * as ROUTES from "../constants/routes";
 
-const Home = lazy(() => import("../pages/home"));
+const AuthRoute = ({ user, children, ...props }) => {
+  const { pathname } = props.location;
 
-const authRoute = () => {
+  if (user) {
+    return pathname.includes(ROUTES.LOGIN) ?
+      <Redirect to={{ pathname: ROUTES.HOME }} />
+      : 
+      <>{children}</>
+  }
+
   return (
-    <Suspense fallback={Loading}>
-      <Route path="/" component={Home} />
-    </Suspense>
+    <Redirect to={{ pathname: ROUTES.LOGIN }} />
   );
 };
 
-export default authRoute;
+export default AuthRoute;
