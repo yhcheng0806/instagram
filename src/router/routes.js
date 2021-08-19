@@ -1,7 +1,29 @@
 import { lazy } from "react";
+import * as ROUTES from "../constants/routes";
 
-export const Login = lazy(() => import("../pages/login"));
-export const Register = lazy(() => import("../pages/register"));
-export const Error = lazy(() => import("../pages/error"));
-export const Home = lazy(() => import("../pages/home"));
-export const Profile = lazy(() => import("../pages/profile"));
+const routes = [
+  {
+    path: ROUTES.LOGIN,
+    component: lazy(() => import("../pages/login")),
+  },
+  {
+    path: ROUTES.REGISTER,
+    component: lazy(() => import("../pages/register")),
+  },
+  {
+    path: ROUTES.ERROR,
+    component: lazy(() => import("../pages/error")),
+  },
+
+  {
+    path: ROUTES.HOME,
+    component: lazy(() => import("../pages/home")),
+  },
+
+  {
+    path: ROUTES.PROFILE,
+    component: lazy(() => import("../pages/profile")),
+  },
+];
+
+export default routes;
