@@ -13,7 +13,11 @@ const AuthRoute = ({ user, children, ...props }) => {
   }
 
   return (
-    <Redirect to={{ pathname: ROUTES.LOGIN }} />
+    <>
+      {children}
+      <Redirect to={{ pathname: ROUTES.LOGIN }} />
+    </>
+    
   );
 };
 

@@ -14,12 +14,10 @@ const routes = [
     path: ROUTES.ERROR,
     component: lazy(() => import("../pages/error")),
   },
-
   {
     path: ROUTES.HOME,
     component: lazy(() => import("../pages/home")),
   },
-
   {
     path: ROUTES.PROFILE,
     component: lazy(() => import("../pages/profile")),

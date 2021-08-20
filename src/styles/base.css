@@ -1,0 +1,10 @@
+body {
+  @apply bg-gray-50
+}
+ 
+#nprogress .bar {
+  background: yellow !important;
+  /* background-image: linear-gradient(to top right, #FBBF24
+,#ec4899) !important; */
+  height: 3px !important;
+}
