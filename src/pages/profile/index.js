@@ -54,7 +54,7 @@ const Profile = (props) => {
                 <strong>正在关注 </strong>0
               </span>
             </Status>
-            <Account>yhcheng</Account>
+            <Account>instagram</Account>
           </InfoBox>
         </TopProFileInfo>
         <TabList>

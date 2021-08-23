@@ -17,8 +17,8 @@ const Sidebar = ({ history }) => {
       <UserInfo>
         <Avatar onClick={ ()=>history.push(ROUTES.PROFILE)} />
         <div>
-          <strong>yuhc12300806</strong>
-          <span>yhcheng</span>
+          <strong>instagram</strong>
+          <span>instagram</span>
         </div>
         <Button onClick={() => { history.push(ROUTES.LOGIN)}}>退出</Button>
       </UserInfo>
