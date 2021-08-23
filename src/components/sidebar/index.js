@@ -20,7 +20,7 @@ const Sidebar = ({ history }) => {
           <strong>yuhc12300806</strong>
           <span>yhcheng</span>
         </div>
-        <Button>退出</Button>
+        <Button onClick={() => { history.push(ROUTES.LOGIN)}}>退出</Button>
       </UserInfo>
       <Recommend>
         <Title>
