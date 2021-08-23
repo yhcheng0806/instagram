@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const Wrapper = styled.div`
-  ${tw`h-screen	`}
+  ${tw`h-screen	w-screen overflow-hidden`}
 `;
 
 export const Container = styled.div`
@@ -10,9 +10,9 @@ export const Container = styled.div`
 `;
 
 export const LeftContent = styled.div`
-${tw`flex-1`}
+  ${tw`flex-1 overflow-y-auto	h-full  pb-32`}
 `;
 
 export const RightContent = styled.div`
-${tw`w-1/3`}
+  ${tw`hidden sm:block w-1/3`}
 `;

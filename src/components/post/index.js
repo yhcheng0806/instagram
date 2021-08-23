@@ -1,4 +1,31 @@
-import { Wrapper, TopContent, Profile, Avatar, UserInfo, Name, Other, Icon, MainContent, ImageContainer, VideoContainer, BottomContent, Actions, Status, BookMark, ThemeContent, Body, Comments, Comment, Time, Config, Expression, Input, AddBtn } from './styles'
+import {
+  Wrapper,
+  TopContent,
+  Profile,
+  Avatar,
+  UserInfo,
+  Name,
+  Other,
+  Icon,
+  MainContent,
+  ImageContainer,
+  VideoContainer,
+  BottomContent,
+  Actions,
+  Status,
+  Likes,
+  BookMark,
+  ThemeContent,
+  Body,
+  Comments,
+  TotalComment,
+  Comment,
+  Time,
+  Config,
+  Expression,
+  Input,
+  AddBtn,
+} from "./styles";
 
 const Post = () => {
   return (
@@ -28,27 +55,41 @@ const Post = () => {
             <Icon />
           </BookMark>
         </Actions>
+        <Likes>
+          <span>0</span>次赞
+        </Likes>
         <ThemeContent>
-          <Body></Body>
-        </ThemeContent>
-        <Comments>
-          <Comment>
-            <div>
-              <strong></strong>
+          <Body>标题内容标题内容</Body>
+          <Comments>
+            <TotalComment>
+              全部<span>0</span>条评论
+            </TotalComment>
+            <Comment>
+              <div>
+                <strong>用户a</strong>
+                <span>聊天内容内容</span>
+              </div>
               <span></span>
-            </div>
-            <Icon></Icon>
-          </Comment>
-        </Comments>
-        <Time></Time>
+              {/* <Icon></Icon> */}
+            </Comment>
+            <Comment>
+              <div>
+                <strong>用户b</strong>
+                <span>聊天内容内容</span>
+              </div>
+              <span></span>
+            </Comment>
+          </Comments>
+          <Time>1天前</Time>
+        </ThemeContent>
         <Config>
           <Expression />
-          <Input />
+          <Input placeholder='添加评论...' />
           <AddBtn>发布</AddBtn>
         </Config>
       </BottomContent>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;

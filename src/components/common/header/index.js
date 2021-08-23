@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/images/logo.png";
+import { useHistory } from "react-router-dom";
 
 import {
   Wrapper,
@@ -13,10 +13,15 @@ import {
 } from "./styles";
 
 const Header = () => {
+  const history = useHistory();
+
   return (
     <Wrapper>
       <Container>
-        <Logo >Instagram</Logo>
+        <Logo
+          onClick={() => history.push("/")}
+          src="https://fontmeme.com/permalink/210823/50ff875ad698b68a5204ae465788590a.png"
+        />
         <Search>
           <Icon />
           <Input />

@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../assets/images/logo.png";
 
 import {
   Wrapper,
@@ -19,7 +18,7 @@ const Register = ({ history, ...props }) => {
     <Wrapper>
       <Container>
         <Form>
-          <Logo src={logo} />
+          <Logo src='https://fontmeme.com/permalink/210823/50ff875ad698b68a5204ae465788590a.png' />
           <FormItem>
             <Input placeholder="手机号或邮箱" />
           </FormItem>

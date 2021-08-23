@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
 
 const Error = () => {
   return (
-    <div>
-      Error
+    <div className="bg-gray-background">
+      <div className="mx-auto max-w-screen-lg">
+        <p className="text-center text-2xl">Not Found!</p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Error
+export default Error;

@@ -10,6 +10,18 @@ body {
   height: 3px !important;
 }
 
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  /* background-color: #fff; */
+}
+
+::-webkit-scrollbar-thumb {
+  background:#9CA3AF;
+}
+
 /* ! tailwindcss v2.2.7 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */

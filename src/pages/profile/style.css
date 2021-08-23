@@ -1,8 +1,0 @@
-.home-wrapper {
-  @apply bg-blue-400 w-screen h-screen grid  items-center justify-center
-};
-
-.box {
-  @apply p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 hover:bg-yellow-300 cursor-pointer
-};
-
