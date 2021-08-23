@@ -6,16 +6,20 @@ export const Wrapper = styled.div`
   border-gray-100 `}
 `;
 export const Container = styled.div`
-  ${tw`w-full md:w-4/5 2xl:w-2/4 mx-auto h-full flex items-center justify-between`}
-  border: 1px solid #000;
+  ${tw`w-full md:w-4/5 2xl:max-w-screen-lg mx-auto h-full flex items-center `}
+
+  *{
+    border: 1px solid #000;
+    flex：1;
+  }
 `;
 
-export const Logo = styled.text`
-  ${tw`w-1/4 `}
+export const Logo = styled.div`
+  ${tw`flex-1 `}
 `;
 
 export const Search = styled.div`
-  ${tw`w-52 h-7 bg-gray-50 border border-gray-300`}
+  ${tw`flex-1 h-7 bg-gray-50 border border-gray-300`}
 `;
 
 export const Icon = styled.div``;
@@ -23,7 +27,7 @@ export const Icon = styled.div``;
 export const Input = styled.div``;
 
 export const Menus = styled.div`
-  ${tw`flex w-1/4 bg-gray-400`}
+  ${tw`flex flex-1 bg-gray-400`}
 `;
 
 export const MenuItem = styled.div`

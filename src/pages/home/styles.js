@@ -6,6 +6,13 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  ${tw`w-full md:w-4/5 2xl:w-2/4 mx-auto h-full`}
-  border: 1px solid #000;
+  ${tw`w-full flex md:w-4/5 2xl:max-w-screen-lg mx-auto h-full`}
+`;
+
+export const LeftContent = styled.div`
+${tw`flex-1`}
+`;
+
+export const RightContent = styled.div`
+${tw`w-1/3`}
 `;
