@@ -4,7 +4,7 @@ import "nprogress/nprogress.css";
 
 import { getToken } from "../utils/auth";
 
-const API = axios.create({ baseURL: "/api" });
+const API = axios.create({ baseURL: "http://47.98.173.20:5000/api" });
 
 API.interceptors.request.use(
   (req) => {
@@ -31,3 +31,9 @@ API.interceptors.request.use(
 );
 
 export default API;
+
+
+
+export const login = (data) => API.post("/auth/login", data);
+
+export const register = (data) => API.post("/auth/register", data);
