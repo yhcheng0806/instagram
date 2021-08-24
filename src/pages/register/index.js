@@ -28,7 +28,7 @@ const Register = ({ history, ...props }) => {
           <FormItem>
             <Input type="password" placeholder="密码" />
           </FormItem>
-          <Tip>注册即表示你同意我们的 条款 、 数据使用政策 和 Cookie 政策 。</Tip>
+          <Tip>注册即表示你同意我们的条款、数据使用政策和Cookie 政策。</Tip>
           <Button>注册</Button>
         </Form>
         <Bottom>

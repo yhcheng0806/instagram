@@ -80,10 +80,10 @@ const Share = ({ history, ...props }) => {
                       <Icon type="icon-bookmark" />
                       <strong>#标签</strong>
                     </ShareOption>
-                    <ShareOption>
+                    {/* <ShareOption>
                       <Icon />
                       <strong>权限</strong>
-                    </ShareOption>
+                    </ShareOption> */}
                     <ShareOption>
                       <Icon type="icon-emoji" />
                       <strong>表情</strong>

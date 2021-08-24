@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const TopProFileInfo = styled.div`
   ${tw`
-    p-4 flex 
+    p-2 flex 
     sm:grid sm:grid-cols-3 sm:p-0 sm:gap-7 sm:justify-between sm:items-center sm:mb-11
   `}
 `;
@@ -58,17 +58,16 @@ export const Account = styled.div`
 `;
 
 export const TabList = styled.div`
-  border-top: 1px solid #dbdbdb;
-  ${tw`h-14 flex items-center justify-center text-sm`}
+  ${tw`border-t border-gray-300 h-14 flex items-center justify-center text-sm`}
 `;
 
 export const Tab = styled.div`
-  ${tw`mr-4 sm:mr-20 flex items-center`}
+  ${tw`mr-4 sm:mr-20 flex items-center text-sm`}
   &:last-child {
     ${tw`mr-0`}
   }
   >span {
-    ${tw`text-2xl mr-1`}
+    ${tw`text-xl sm:text-2xl mr-1`}
   }
 `;
 
@@ -85,7 +84,8 @@ export const Photo = styled.div`
 export const Mask = styled.div`
   ${tw`
     absolute w-full h-full z-10 hidden items-center justify-center bg-gray-900 bg-opacity-50 
-    group-hover:flex hover:cursor-pointer
+    group-hover:flex-col
+    sm: group-hover:flex hover:cursor-pointer
   `}
 `;
 
