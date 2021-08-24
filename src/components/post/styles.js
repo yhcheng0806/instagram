@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const Wrapper = styled.div`
-  ${tw`rounded border bg-white border-gray-300 mb-6`}
+  ${tw`sm:rounded sm:border sm:bg-white sm:border-gray-300 sm:mb-6`}
 `;
 export const TopContent = styled.div`
   ${tw`h-16 p-4 flex items-center justify-between`}
@@ -36,12 +36,15 @@ export const VideoContainer = styled.div``;
 export const BottomContent = styled.div``;
 
 export const Actions = styled.div`
-  ${tw`flex items-center justify-between`}
+  ${tw`px-4 flex items-center justify-between`}
+  >span {
+    ${tw`text-3xl`}
+  }
 `;
 export const Status = styled.div`
-  ${tw`flex items-center h-10 px-4`}
-  div {
-    ${tw`w-6 h-6 mr-4`}
+  ${tw`flex items-center h-10 `}
+  >span {
+    ${tw`text-2xl mr-2`}
   }
 `;
 export const Likes = styled.div`
@@ -50,7 +53,6 @@ export const Likes = styled.div`
     ${tw`mr-1 font-medium	`}
   }
 `;
-export const BookMark = styled.div``;
 export const ThemeContent = styled.div`
   ${tw`px-4 pb-2`}
 `;
@@ -58,9 +60,7 @@ export const ThemeContent = styled.div`
 export const Body = styled.div`
   ${tw`text-gray-800 text-sm`}
 `;
-export const Comments = styled.div`
-
-`;
+export const Comments = styled.div``;
 
 export const TotalComment = styled.div`
   ${tw`py-2 text-gray-400 text-sm`}
@@ -76,24 +76,24 @@ export const Comment = styled.div`
       ${tw`mr-2 font-medium`}
     }
   }
-  >span {
+  > span {
     ${tw`w-3 h-3 bg-gray-200 flex-shrink-0`}
   }
 `;
 
 export const Time = styled.div`
-${tw`text-xs text-gray-500`}
+  ${tw`text-xs text-gray-500`}
 `;
 
 export const Config = styled.div`
-${tw`h-14 flex items-center px-4`}
-`;
-export const Expression = styled.div`
-  ${tw`w-6 h-6 bg-gray-400 mr-4`}
+  ${tw`hidden h-14 sm:flex items-center px-4`}
+  >span {
+    ${tw`text-xl mr-2`}
+  }
 `;
 
 export const Input = styled.input`
-${tw`text-sm w-full bg-transparent focus:outline-none`}
+  ${tw`text-sm w-full bg-transparent focus:outline-none`}
 `;
 
 export const AddBtn = styled.div`

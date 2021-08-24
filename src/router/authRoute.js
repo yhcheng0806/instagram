@@ -11,7 +11,7 @@ const AuthRoute = ({ user, children, ...props }) => {
   //   return <Redirect to={{ pathname: ROUTES.ERROR }} />;
   // }
 
-  if (user.avatar) {
+  if (user) {
     return pathname.includes(ROUTES.LOGIN) ? (
       <Redirect to={{ pathname: ROUTES.HOME }} />
     ) : (

@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import defaultAvatar from "../../assets/images/defaultAvatar.png";
+
 import {
   Wrapper,
   Container,
@@ -7,8 +9,6 @@ import {
   Avatar,
   InfoBox,
   Name,
-  Button,
-  Icon,
   Status,
   Account,
   TabList,
@@ -22,6 +22,7 @@ import {
 } from "./styles";
 
 import Header from "../../components/common/header";
+import Icon from "../../components/common/icon";
 
 const Profile = (props) => {
   const params = useParams();
@@ -32,7 +33,7 @@ const Profile = (props) => {
       <Container>
         <TopProFileInfo>
           <Avatar>
-            <img src="" alt="" />
+            <img src={defaultAvatar} alt="" />
           </Avatar>
           <InfoBox>
             <Name>
@@ -59,19 +60,19 @@ const Profile = (props) => {
         </TopProFileInfo>
         <TabList>
           <Tab>
-            <Icon />
+            <Icon type="icon-layout3" />
             帖子
           </Tab>
           <Tab>
-            <Icon />
+            <Icon type="icon-tv" />
             IGTV
           </Tab>
           <Tab>
-            <Icon />
+            <Icon type="icon-bookmark" />
             收藏夹
           </Tab>
           <Tab>
-            <Icon />
+            <Icon type="icon-frame" />
             已标记
           </Tab>
         </TabList>

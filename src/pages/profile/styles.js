@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const Wrapper = styled.div`
-  ${tw`h-screen`}
+  ${tw`h-screen bg-gray-50`}
 `;
 export const Container = styled.div`
   ${tw`w-full sm:w-4/5 2xl:max-w-screen-lg mx-auto h-full sm:px-5 sm:pt-6`}
@@ -67,8 +67,8 @@ export const Tab = styled.div`
   &:last-child {
     ${tw`mr-0`}
   }
-  > div {
-    ${tw`w-3 h-3 bg-gray-200 flex-shrink-0 mr-2`}
+  >span {
+    ${tw`text-2xl mr-1`}
   }
 `;
 

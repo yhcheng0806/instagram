@@ -1,4 +1,6 @@
 import * as ROUTES from "../../constants/routes";
+import defaultAvatar from "../../assets/images/defaultAvatar.png";
+
 import {
   Wrapper,
   UserInfo,
@@ -15,7 +17,7 @@ const Sidebar = ({ history }) => {
   return (
     <Wrapper>
       <UserInfo>
-        <Avatar onClick={ ()=>history.push(ROUTES.PROFILE)} />
+        <Avatar src={ defaultAvatar} onClick={ ()=>history.push(ROUTES.PROFILE)} />
         <div>
           <strong>instagram</strong>
           <span>instagram</span>

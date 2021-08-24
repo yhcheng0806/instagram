@@ -1,3 +1,7 @@
+import { useState } from "react";
+import * as ROUTES from "../../constants/routes";
+import Icon from "../common/icon";
+
 import {
   Wrapper,
   TopContent,
@@ -6,7 +10,6 @@ import {
   UserInfo,
   Name,
   Other,
-  Icon,
   MainContent,
   ImageContainer,
   VideoContainer,
@@ -14,7 +17,6 @@ import {
   Actions,
   Status,
   Likes,
-  BookMark,
   ThemeContent,
   Body,
   Comments,
@@ -22,23 +24,25 @@ import {
   Comment,
   Time,
   Config,
-  Expression,
   Input,
   AddBtn,
 } from "./styles";
 
-const Post = () => {
+const Post = ({ history }) => {
+  const [liked, setLiked] = useState(false);
+  const [collected, setCollected] = useState(false);
+
   return (
     <Wrapper>
       <TopContent>
         <Profile>
-          <Avatar />
+          <Avatar onClick={() => history.push(ROUTES.PROFILE)} />
           <UserInfo>
             <Name>instagram</Name>
             <Other>Daejeon, South Korea</Other>
           </UserInfo>
         </Profile>
-        <Icon />
+        <Icon type="icon-more" />
       </TopContent>
       <MainContent>
         <ImageContainer></ImageContainer>
@@ -47,13 +51,17 @@ const Post = () => {
       <BottomContent>
         <Actions>
           <Status>
-            <Icon />
-            <Icon />
-            <Icon />
+            <Icon
+              type={`icon-heart${liked ? "-active" : ""}`}
+              onClick={() => setLiked(!liked)}
+            />
+            <Icon type="icon-chat" />
+            <Icon type="icon-plane" />
           </Status>
-          <BookMark>
-            <Icon />
-          </BookMark>
+          <Icon
+            type={`icon-bookmark${collected ? "-active" : ""}`}
+            onClick={() => setCollected(!collected)}
+          />
         </Actions>
         <Likes>
           <span>0</span>次赞
@@ -69,22 +77,27 @@ const Post = () => {
                 <strong>用户a</strong>
                 <span>聊天内容内容</span>
               </div>
-              <span></span>
-              {/* <Icon></Icon> */}
+              <Icon
+                type={`icon-heart${liked ? "-active" : ""}`}
+                onClick={() => setLiked(!liked)}
+              />
             </Comment>
             <Comment>
               <div>
                 <strong>用户b</strong>
                 <span>聊天内容内容</span>
               </div>
-              <span></span>
+              <Icon
+                type={`icon-heart${liked ? "-active" : ""}`}
+                onClick={() => setLiked(!liked)}
+              />
             </Comment>
           </Comments>
           <Time>1天前</Time>
         </ThemeContent>
         <Config>
-          <Expression />
-          <Input placeholder='添加评论...' />
+          <Icon type="icon-emoji" />
+          <Input placeholder="添加评论..." />
           <AddBtn>发布</AddBtn>
         </Config>
       </BottomContent>

@@ -14,17 +14,24 @@ export const Logo = styled.img`
 `;
 
 export const Search = styled.div`
-  ${tw`sm:block hidden w-52 mx-auto	 h-7 bg-gray-50 border border-gray-300`}
+  ${tw`sm:flex hidden w-52 mx-auto text-sm text-gray-600 items-center justify-center	 h-7 bg-gray-50 border border-gray-300`}
+  >span {
+    ${tw`mr-2`}
+  }
 `;
-
-export const Icon = styled.div``;
-
 export const Input = styled.div``;
 
 export const Menus = styled.div`
-  ${tw`flex ml-auto sm:ml-0`}
+  ${tw` fixed left-0 bottom-0 w-full bg-white py-1 justify-around sm:py-0 sm:w-auto sm:justify-start sm:relative flex ml-auto sm:ml-0`}
 `;
 
 export const MenuItem = styled.div`
-  ${tw`w-6 h-6 bg-gray-400 m-1 rounded-full`}
+  ${tw`w-6 h-6 flex items-center justify-center  m-2 hover:cursor-pointer`}
+  >span {
+    ${tw`text-2xl`}
+  }
+`;
+
+export const Avatar = styled.img`
+  ${tw`w-6 h-6 rounded-full object-cover flex-shrink-0`}
 `;

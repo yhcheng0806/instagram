@@ -1,16 +1,16 @@
-import Post from '../post'
+import Post from "../post";
 
-import { Wrapper } from './styles'
+import { Wrapper } from "./styles";
 
-const Timeline = () => {
+const Timeline = ({ history }) => {
   return (
     <Wrapper>
-      <Post />
+      <Post history={history} />
       <Post />
       <Post />
       <Post />
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Timeline
+export default Timeline;

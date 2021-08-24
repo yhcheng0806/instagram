@@ -22,6 +22,10 @@ const routes = [
     path: ROUTES.PROFILE,
     component: lazy(() => import("../pages/profile")),
   },
+  {
+    path: ROUTES.SHARE,
+    component: lazy(() => import("../pages/share")),
+  },
 ];
 
 export default routes;

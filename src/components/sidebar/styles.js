@@ -18,8 +18,8 @@ export const UserInfo = styled.div`
   }
 `;
 
-export const Avatar = styled.div`
-  ${tw`w-14 h-14 bg-gray-200 rounded-full	`}
+export const Avatar = styled.img`
+  ${tw`w-14 h-14 bg-gray-200 rounded-full object-cover	`}
 `;
 
 export const Button = styled.button`

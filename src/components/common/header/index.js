@@ -1,21 +1,23 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import * as ROUTES from "../../../constants/routes";
+import Icon from "../icon";
+import defaultAvatar from "../../../assets/images/defaultAvatar.png";
 
 import {
   Wrapper,
   Container,
   Logo,
   Search,
-  Icon,
-  Input,
+  // Input,
   Menus,
   MenuItem,
+  Avatar,
 } from "./styles";
 
 const Header = () => {
   const history = useHistory();
-
-  return (
+  return !history.location.pathname.includes("share") ? (
     <Wrapper>
       <Container>
         <Logo
@@ -23,29 +25,30 @@ const Header = () => {
           src="https://fontmeme.com/permalink/210823/50ff875ad698b68a5204ae465788590a.png"
         />
         <Search>
-          <Icon />
-          <Input />
+          <Icon type="icon-search" />
+          搜索
+          {/* <Input placeholder="" /> */}
         </Search>
         <Menus>
-          <MenuItem>
-            <Icon />
+          <MenuItem onClick={() => history.push(ROUTES.HOME)}>
+            <Icon type="icon-home" />
           </MenuItem>
-          <MenuItem>
-            <Icon />
+          <MenuItem onClick={() => history.push(ROUTES.HOME)}>
+            <Icon type="icon-share" />
           </MenuItem>
-          <MenuItem>
-            <Icon />
+          <MenuItem onClick={() => history.push(ROUTES.SHARE)}>
+            <Icon type="icon-add" />
           </MenuItem>
-          <MenuItem>
-            <Icon />
+          <MenuItem onClick={() => history.push(ROUTES.HOME)}>
+            <Icon type="icon-heart" />
           </MenuItem>
-          <MenuItem>
-            <Icon />
+          <MenuItem onClick={() => history.push(ROUTES.PROFILE)}>
+            <Avatar src={defaultAvatar} />
           </MenuItem>
         </Menus>
       </Container>
     </Wrapper>
-  );
+  ) : null;
 };
 
 export default Header;
