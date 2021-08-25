@@ -26,7 +26,6 @@ import Icon from "../../components/common/icon";
 
 const Profile = (props) => {
   const params = useParams();
-  console.log(props, params, "--props");
   return (
     <Wrapper>
       <Header />

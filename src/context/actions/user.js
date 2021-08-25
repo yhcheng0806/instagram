@@ -1,14 +1,23 @@
 import * as API from "../../api";
-import { LOGIN, REGISTER } from "../../constants/actionTypes";
+import * as ROUTES from '../../constants/routes'
+import { LOGIN, LOGOUT } from "../../constants/actionTypes";
 
-export const login = (formData, cb) => async (dispatch) => {
-  try {
-    const res = await API.login(formData);
-    console.log(res, "--res---");
-    dispatch({ type: LOGIN, payload: {} });
-  } catch (error) {
-    console.log(error.message, "--error---");
-
+export const login = (formData, err) => async (dispatch) => {
+  const res = await API.login(formData);
+  if (res.message) {
+    return err(res.message);
   }
-  cb && cb();
+  dispatch({ type: LOGIN, payload: res });
+};
+
+export const register = (formData, history, err) => async (dispatch) => {
+  const res = await API.register(formData);
+  if (res.message) {
+    return err(res.message);
+  }
+  history.replace(ROUTES.LOGIN)
+};
+
+export const logout = {
+  type: LOGOUT,
 };

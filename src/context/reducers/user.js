@@ -1,13 +1,16 @@
-import { LOGIN } from "../../constants/actionTypes";
+import { LOGIN, LOGOUT } from "../../constants/actionTypes";
+import { getUserInfo, setUserInfo } from "../../utils/auth";
 
-const initState = {
-  avatar: null,
-};
+const initState = getUserInfo()?.result || null;
 
-const userReducer = (state = initState, { type, pauload }) => {
+const userReducer = (state = initState, { type, payload }) => {
   switch (type) {
     case LOGIN:
-      return state;
+      setUserInfo(payload);
+      return { ...state, ...payload.result };
+    case LOGOUT:
+      localStorage.clear();
+      return null;
     default:
       return state;
   }

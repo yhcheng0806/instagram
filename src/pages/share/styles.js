@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const Wrapper = styled.div`
-  ${tw`h-screen	w-screen overflow-hidden bg-gray-50`}
+  ${tw`h-screen	w-screen  bg-gray-50`}
 `;
 
 export const Container = styled.div`
@@ -48,23 +48,34 @@ export const Panel = styled.div`
 export const Main = styled.div`
   ${tw`flex-1 px-3 relative flex flex-col`}
 `;
-export const Avatar = styled.div`
-  ${tw`w-8 h-8 bg-gray-200 rounded-full`}
+export const Avatar = styled.img`
+  ${tw`w-8 h-8 bg-gray-200 rounded-full object-cover`}
 `;
 
 export const Textarea = styled.textarea`
-  ${tw`flex-1 h-12 max-h-48	 focus:outline-none`}
+  ${tw`w-full h-auto max-h-24	text-sm overflow-y-auto	 focus:outline-none`}
 `;
 
-export const ImageContainer = styled.div`
+export const MainContent = styled.div`
+  /* ${tw`grid gap-3 grid-cols-3`} */
+`;
+
+export const Photo = styled.div`
+  ${tw`relative mt-2`}
+`;
+
+export const CloseIcon = styled.div`
+${tw`absolute top-2 right-3 z-10`}
+span {
+  ${tw`text-xl text-white hover:cursor-pointer`}
+}
+`
+
+export const ImgContainer = styled.div`
   ${tw`relative`}
 `;
 
-export const CloseCircleFilled = styled.div`
-  ${tw`absolute`}
-`;
-
-export const Image = styled.img``;
+export const VideoContainer = styled.div``;
 
 export const ShareOptions = styled.div`
   ${tw`flex mt-2`}
@@ -75,7 +86,7 @@ export const ShareOption = styled.div`
   >* {
     ${tw`flex items-center`}
   }
-  
+
   strong {
     ${tw`pl-1 text-sm font-medium text-gray-600`}
   }

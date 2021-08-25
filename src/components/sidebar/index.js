@@ -1,5 +1,8 @@
 import * as ROUTES from "../../constants/routes";
+import { useDispatch } from "react-redux";
 import defaultAvatar from "../../assets/images/defaultAvatar.png";
+
+import * as Actions from '../../context/actions/user'
 
 import {
   Wrapper,
@@ -14,15 +17,29 @@ import {
 } from "./styles";
 
 const Sidebar = ({ history }) => {
+  const dispatch = useDispatch()
+  // const user = useSelector((state) => state.user);
+  // console.log(user, "----user---");
+  const logout = () => {
+    dispatch(Actions.logout)
+  }
+
   return (
     <Wrapper>
       <UserInfo>
-        <Avatar src={ defaultAvatar} onClick={ ()=>history.push(ROUTES.PROFILE)} />
+        <Avatar
+          src={defaultAvatar}
+          onClick={() => history.push(ROUTES.PROFILE)}
+        />
         <div>
           <strong>instagram</strong>
           <span>instagram</span>
         </div>
-        <Button onClick={() => { history.push(ROUTES.LOGIN)}}>退出</Button>
+        <Button
+          onClick={logout}
+        >
+          退出
+        </Button>
       </UserInfo>
       <Recommend>
         <Title>

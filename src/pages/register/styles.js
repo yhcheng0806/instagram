@@ -36,7 +36,14 @@ export const Tip = styled.div`
 `;
 
 export const Button = styled.button`
-  ${tw`rounded-sm shadow-md bg-blue-400 w-full h-9 text-white  text-sm flex items-center justify-center`}
+  ${tw`rounded-sm shadow-md bg-blue-200 w-full h-9 text-white  text-sm flex items-center justify-center`}
+  &.active {
+    ${tw`bg-blue-400`}
+  }
+`;
+
+export const ErrorTip = styled.div`
+  ${tw`text-center pt-6 text-xs text-red-400`}
 `;
 
 export const Bottom = styled.div`

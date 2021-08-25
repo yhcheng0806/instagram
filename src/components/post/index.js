@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Carousel } from "antd";
 import * as ROUTES from "../../constants/routes";
 import Icon from "../common/icon";
 
@@ -11,8 +12,7 @@ import {
   Name,
   Other,
   MainContent,
-  ImageContainer,
-  VideoContainer,
+  Photo,
   BottomContent,
   Actions,
   Status,
@@ -28,7 +28,8 @@ import {
   AddBtn,
 } from "./styles";
 
-const Post = ({ history }) => {
+const Post = ({ history, post }) => {
+  const PF = "http://localhost:5000/static/";
   const [liked, setLiked] = useState(false);
   const [collected, setCollected] = useState(false);
 
@@ -36,18 +37,32 @@ const Post = ({ history }) => {
     <Wrapper>
       <TopContent>
         <Profile>
-          <Avatar onClick={() => history.push(ROUTES.PROFILE)} />
+          <Avatar
+            src={PF + post.avatar}
+            onClick={() => history.push(ROUTES.PROFILE)}
+          />
           <UserInfo>
-            <Name>instagram</Name>
+            <Name>{post.name || post.username}</Name>
             <Other>Daejeon, South Korea</Other>
           </UserInfo>
         </Profile>
         <Icon type="icon-more" />
       </TopContent>
-      <MainContent>
-        <ImageContainer></ImageContainer>
-        <VideoContainer></VideoContainer>
-      </MainContent>
+      {post.photos.length ? (
+        <MainContent>
+          <Carousel>
+            {post.photos.map((photo) => (
+              <Photo>
+                {photo.isImg ? (
+                  <img src={PF + photo.src} alt="" />
+                ) : (
+                  <video src={PF + photo.src} controls></video>
+                )}
+              </Photo>
+            ))}
+          </Carousel>
+        </MainContent>
+      ) : null}
       <BottomContent>
         <Actions>
           <Status>
@@ -64,10 +79,10 @@ const Post = ({ history }) => {
           />
         </Actions>
         <Likes>
-          <span>0</span>次赞
+          <span>{post.likes.length}</span>次赞
         </Likes>
         <ThemeContent>
-          <Body>标题内容标题内容</Body>
+          <Body>{post.desc}</Body>
           <Comments>
             <TotalComment>
               全部<span>0</span>条评论

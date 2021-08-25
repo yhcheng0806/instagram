@@ -28,10 +28,23 @@ export const Icon = styled.div`
   border: 1px solid #000;
 `;
 export const MainContent = styled.div`
-  ${tw`bg-gray-400 h-96`}
+  ${tw`w-full`}
 `;
-export const ImageContainer = styled.div``;
-export const VideoContainer = styled.div``;
+
+export const Photo = styled.div`
+  ${tw`w-full h-60 sm:h-96 `}
+  >img {
+    ${tw`w-full h-full object-cover`}
+  }
+`;
+
+// export const ImageContainer = styled.div`
+//  ${tw`w-full`}
+//  img{
+//    ${tw`w-full h-full object-cover`}
+//  }
+// `;
+// export const VideoContainer = styled.div``;
 
 export const BottomContent = styled.div``;
 
