@@ -4,7 +4,7 @@ import "nprogress/nprogress.css";
 
 import { getUserInfo } from "../utils/auth";
 
-const API = axios.create({ baseURL: "http://localhost:5000/api" });
+const API = axios.create({ baseURL: "/api" });
 
 API.interceptors.request.use(
   (req) => {
