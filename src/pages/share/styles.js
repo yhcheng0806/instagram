@@ -32,7 +32,10 @@ export const Title = styled.div`
 `;
 
 export const Button = styled.div`
-  ${tw`text-sm text-blue-400 font-medium`}
+  ${tw`text-sm text-blue-200 font-medium hover:cursor-not-allowed`}
+  &.active {
+    ${tw`text-blue-400 hover:cursor-pointer`}
+  }
 `;
 
 export const ShareContainer = styled.div`

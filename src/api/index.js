@@ -39,6 +39,7 @@ export const register = (data) => API.post("/auth/register", data);
 export const upload = (data) => API.post("/upload", data);
 
 export const getUser = (id) => API.get(`/users/${id}`);
+export const updateUser = (data)=>API.post('/users/update',data)
 
 export const getPosts = () => API.get("/posts");
 export const getPost = (id) => API.get(`/posts/${id}`);
@@ -47,4 +48,4 @@ export const followingPost = (data) => API.get("/posts/following", data);
 export const updatePost = (id, data) => API.put(`/posts/update/${id}`, data);
 export const deletePost = (id, data) => API.delete(`/posts/delete/${id}`, data);
 export const likePost = (id) => API.put(`/posts/like/${id}`);
-export const getSelfPosts = (id, data) => API.post(`/posts/self`, data);
+export const getSelfPosts = (data) => API.post(`/posts/self`, data);

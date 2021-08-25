@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Carousel } from "antd";
+import { format } from "timeago.js";
+
 import * as ROUTES from "../../constants/routes";
 import Icon from "../common/icon";
 
@@ -29,7 +31,7 @@ import {
 } from "./styles";
 
 const Post = ({ history, post }) => {
-  const PF = "http://localhost:5000/static/";
+  const PF = ""
   const [liked, setLiked] = useState(false);
   const [collected, setCollected] = useState(false);
 
@@ -48,21 +50,19 @@ const Post = ({ history, post }) => {
         </Profile>
         <Icon type="icon-more" />
       </TopContent>
-      {post.photos.length ? (
-        <MainContent>
-          <Carousel>
-            {post.photos.map((photo) => (
-              <Photo>
-                {photo.isImg ? (
-                  <img src={PF + photo.src} alt="" />
-                ) : (
-                  <video src={PF + photo.src} controls></video>
-                )}
-              </Photo>
-            ))}
-          </Carousel>
-        </MainContent>
-      ) : null}
+      <MainContent>
+        <Carousel>
+          {post.photos.map((photo) => (
+            <Photo key={photo.src}>
+              {photo.isImg ? (
+                <img src={PF + photo.src} alt="" />
+              ) : (
+                <video src={PF + photo.src} controls></video>
+              )}
+            </Photo>
+          ))}
+        </Carousel>
+      </MainContent>
       <BottomContent>
         <Actions>
           <Status>
@@ -108,7 +108,7 @@ const Post = ({ history, post }) => {
               />
             </Comment>
           </Comments>
-          <Time>1天前</Time>
+          <Time>{format(post.createdAt, "zh_CN")}</Time>
         </ThemeContent>
         <Config>
           <Icon type="icon-emoji" />

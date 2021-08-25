@@ -18,7 +18,7 @@ export const TopProFileInfo = styled.div`
 export const Avatar = styled.div`
   ${tw`sm:col-span-1 sm:h-full sm:flex sm:items-center sm:justify-center `}
   img {
-    ${tw`w-20 h-20 sm:w-40 sm:h-40 bg-gray-200 rounded-full flex-shrink-0`}
+    ${tw`w-20 h-20 sm:w-40 sm:h-40 bg-gray-200 rounded-full flex-shrink-0 object-cover`}
   }
 `;
 
@@ -58,7 +58,7 @@ export const Account = styled.div`
 `;
 
 export const TabList = styled.div`
-  ${tw`border-t border-gray-300 h-14 flex items-center justify-center text-sm`}
+  ${tw`border-t border-gray-300 h-14 flex justify-center text-sm`}
 `;
 
 export const Tab = styled.div`
@@ -66,8 +66,8 @@ export const Tab = styled.div`
   &:last-child {
     ${tw`mr-0`}
   }
-  >span {
-    ${tw`text-xl sm:text-2xl mr-1`}
+  > span {
+    ${tw`text-xl flex items-center sm:text-2xl mr-1`}
   }
 `;
 
@@ -79,24 +79,24 @@ export const Photos = styled.div`
 
 export const Photo = styled.div`
   ${tw`relative bg-blue-300 h-40 sm:h-72`}
+  img {
+    ${tw`w-full h-full object-cover`}
+  }
 `;
 
 export const Mask = styled.div`
   ${tw`
     absolute w-full h-full z-10 hidden items-center justify-center bg-gray-900 bg-opacity-50 
-    group-hover:flex-col
-    sm: group-hover:flex hover:cursor-pointer
+    group-hover:flex hover:cursor-pointer
   `}
 `;
 
 export const FuncItem = styled.div`
-  ${tw`mr-2 sm:mr-8 text-white flex items-center text-sm sm:text-lg`}
+  ${tw`mr-2  md:mr-8 text-white flex items-center text-sm sm:text-lg`}
   &:last-child {
     ${tw`mr-0`}
   }
-  > div {
-    ${tw`w-3 h-3 sm:w-5 sm:h-5 bg-white mr-2`}
+  > span {
+    ${tw`text-sm sm:text-xl flex items-center mr-2`}
   }
 `;
-
-export const ImgContainer = styled.div``;

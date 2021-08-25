@@ -39,7 +39,7 @@ import {
 } from "./styles";
 
 const Share = ({ history, ...props }) => {
-  const PF = "http://localhost:5000/static/";
+  const PF = ""
 
   const [formData, setFormData] = useState({
     photos: [],
@@ -97,8 +97,8 @@ const Share = ({ history, ...props }) => {
   };
 
   const checkData = () => {
-    const { desc } = formData;
-    return !!desc;
+    const { desc, photos } = formData;
+    return desc && photos.length;
   };
 
   const submit = async () => {
@@ -125,7 +125,7 @@ const Share = ({ history, ...props }) => {
             <ShareNav>
               <Icon type="icon-arrow-left" onClick={() => history.goBack()} />
               <Title>新帖子</Title>
-              <Button onClick={submit}>
+              <Button className={checkData() && "active"} onClick={submit}>
                 {loading ? <LoadingOutlined /> : "分享"}
               </Button>
             </ShareNav>

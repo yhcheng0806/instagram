@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import { useHistory } from "react-router-dom";
 import * as ROUTES from "../../../constants/routes";
 import Icon from "../icon";
@@ -16,6 +18,8 @@ import {
 } from "./styles";
 
 const Header = () => {
+  const { user } = useSelector((state) => state);
+
   const history = useHistory();
   return !history.location.pathname.includes("share") ? (
     <Wrapper>
@@ -42,8 +46,8 @@ const Header = () => {
           <MenuItem onClick={() => history.push(ROUTES.HOME)}>
             <Icon type="icon-heart" />
           </MenuItem>
-          <MenuItem onClick={() => history.push(ROUTES.PROFILE)}>
-            <Avatar src={defaultAvatar} />
+          <MenuItem onClick={() => history.push("/p/" + user.username)}>
+            <Avatar src={user.avatar || defaultAvatar} />
           </MenuItem>
         </Menus>
       </Container>

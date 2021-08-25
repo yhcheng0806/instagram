@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import defaultAvatar from "../../assets/images/defaultAvatar.png";
 
 import {
   Wrapper,
@@ -18,25 +18,67 @@ import {
   Photo,
   Mask,
   FuncItem,
-  ImgContainer,
 } from "./styles";
 
 import Header from "../../components/common/header";
 import Icon from "../../components/common/icon";
+import * as API from "../../api";
 
-const Profile = (props) => {
-  const params = useParams();
+const Profile = () => {
+  const PF = "";
+
+  const state = useSelector((state) => state);
+
+  const { username } = useParams();
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [avatar, setAvatar] = useState("");
+
+  useEffect(() => {
+    const getUser = async () => {
+      setUser(await API.getUser(username));
+      const res = await API.getSelfPosts({ username });
+      setPosts(
+        res.sort((p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt))
+      );
+    };
+    getUser();
+  }, [username]);
+
+  const uploadAvatar = async ({ target }) => {
+    const file = target.files[0];
+    const fileName = Date.now() + file.name;
+    const data = new FormData();
+    data.append("name", fileName);
+    data.append("file", file);
+    await API.upload(data);
+    await API.updateUser({ username, avatar: fileName });
+    setAvatar(fileName);
+  };
+
   return (
     <Wrapper>
       <Header />
       <Container>
         <TopProFileInfo>
-          <Avatar>
-            <img src={defaultAvatar} alt="" />
-          </Avatar>
+          <label htmlFor="file">
+            <Avatar>
+              <img src={avatar ? PF + avatar : PF + user?.avatar} alt="" />
+            </Avatar>
+            {state?.user?.username === user?.username ? (
+              <input
+                style={{ display: "none" }}
+                type="file"
+                id="file"
+                accept="image/*"
+                onChange={(e) => uploadAvatar(e)}
+              />
+            ) : null}
+          </label>
+
           <InfoBox>
             <Name>
-              <span>{params?.username}</span>
+              <span>{user?.username}</span>
               {/* <Button>发消息</Button> */}
               {/* <Button>
                 <Icon />
@@ -45,13 +87,15 @@ const Profile = (props) => {
             </Name>
             <Status>
               <span>
-                0<strong> 篇帖子</strong>
+                {posts.length}
+                <strong> 篇帖子</strong>
               </span>
               <span>
-                0<strong> 粉丝</strong>
+                {user?.followers.length}
+                <strong> 粉丝</strong>
               </span>
               <span>
-                <strong>正在关注 </strong>0
+                <strong>正在关注 </strong> {user?.following.length}
               </span>
             </Status>
             <Account>instagram</Account>
@@ -77,72 +121,19 @@ const Profile = (props) => {
         </TabList>
         <Main>
           <Photos>
-            <Photo className="group">
-              <Mask>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-              </Mask>
-              <ImgContainer />
-            </Photo>
-            <Photo>
-              <Mask>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-              </Mask>
-              <ImgContainer />
-            </Photo>
-            <Photo>
-              <Mask>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-              </Mask>
-              <ImgContainer />
-            </Photo>
-            <Photo>
-              <Mask>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-              </Mask>
-              <ImgContainer />
-            </Photo>
-            <Photo>
-              <Mask>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-              </Mask>
-              <ImgContainer />
-            </Photo>
-            <Photo>
-              <Mask>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-                <FuncItem>
-                  <Icon />0
-                </FuncItem>
-              </Mask>
-              <ImgContainer />
-            </Photo>
+            {posts.map((post) => (
+              <Photo key={post._id} className="group">
+                <Mask>
+                  <FuncItem>
+                    <Icon type="icon-heart-white" />0
+                  </FuncItem>
+                  <FuncItem>
+                    <Icon type="icon-chat-white" />0{" "}
+                  </FuncItem>
+                </Mask>
+                <img src={PF + post.photos[0].src} alt="" />
+              </Photo>
+            ))}
           </Photos>
         </Main>
       </Container>

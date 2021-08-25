@@ -33,18 +33,10 @@ export const MainContent = styled.div`
 
 export const Photo = styled.div`
   ${tw`w-full h-60 sm:h-96 `}
-  >img {
+  img,video {
     ${tw`w-full h-full object-cover`}
   }
 `;
-
-// export const ImageContainer = styled.div`
-//  ${tw`w-full`}
-//  img{
-//    ${tw`w-full h-full object-cover`}
-//  }
-// `;
-// export const VideoContainer = styled.div``;
 
 export const BottomContent = styled.div``;
 
