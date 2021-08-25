@@ -37,7 +37,7 @@ export const Button = styled.div`
 
 export const ShareContainer = styled.div`
   > div {
-    ${tw`bg-white flex justify-between border-b border-gray-300 mb-3`}
+    ${tw`bg-white text-xs sm:text-sm  flex justify-between border-b border-t border-gray-300 mb-3`}
   }
 `;
 
@@ -88,7 +88,7 @@ export const ShareOption = styled.div`
   }
 
   strong {
-    ${tw`pl-1 text-sm font-medium text-gray-600`}
+    ${tw`pl-1 flex-shrink-0 font-medium text-gray-600`}
   }
 `;
 
@@ -103,7 +103,7 @@ export const ShareBottom = styled.div`
 `;
 
 export const SubmitBtn = styled.button`
-  ${tw`text-center  py-1 text-sm    text-blue-400 font-medium hover:text-blue-300`}
+  ${tw`text-center  py-1    text-blue-400 font-medium hover:text-blue-300`}
 `;
 
 export const RightContent = styled.div`

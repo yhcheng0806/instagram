@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const Wrapper = styled.div`
-  ${tw`sm:rounded sm:border sm:bg-white sm:border-gray-300 sm:mb-6`}
+  ${tw`sm:rounded sm:border bg-white sm:border-gray-300 sm:mb-6`}
 `;
 export const TopContent = styled.div`
   ${tw`h-16 p-4 flex items-center justify-between`}

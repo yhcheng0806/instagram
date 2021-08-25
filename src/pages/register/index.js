@@ -87,7 +87,7 @@ const Register = ({ history, ...props }) => {
             />
           </FormItem>
           <Tip>
-            注册即表示你同意我们的 条款 、 数据使用政策 和 Cookie 政策 。
+            注册即表示你同意我们的条款、数据使用政策和Cookie政策。
           </Tip>
           <Button className={checkData() && "active"} onClick={submit}>
             {loading ? <LoadingOutlined /> : "注册"}

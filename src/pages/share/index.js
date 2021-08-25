@@ -104,7 +104,7 @@ const Share = ({ history, ...props }) => {
   const submit = async () => {
     if (loading) return;
     if (!checkData()) return;
-    
+
     setLoading(true);
     try {
       await API.createPost({
@@ -188,10 +188,10 @@ const Share = ({ history, ...props }) => {
                       <Icon type="icon-bookmark" />
                       <strong>#标签</strong>
                     </ShareOption>
-                    <ShareOption>
-                      {/* <Icon /> */}
+                    {/* <ShareOption>
+                      <Icon />
                       <strong>权限</strong>
-                    </ShareOption>
+                    </ShareOption> */}
                     <ShareOption>
                       <Icon type="icon-emoji" />
                       <strong>表情</strong>
