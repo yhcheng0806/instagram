@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as ROUTES from "../../../constants/routes";
 import Icon from "../icon";
-import defaultAvatar from "../../../assets/images/defaultAvatar.png";
 
 import {
   Wrapper,
@@ -18,6 +17,8 @@ import {
 } from "./styles";
 
 const Header = () => {
+  const PF = "http://localhost:5000/static/"
+
   const { user } = useSelector((state) => state);
 
   const history = useHistory();
@@ -47,7 +48,7 @@ const Header = () => {
             <Icon type="icon-heart" />
           </MenuItem>
           <MenuItem onClick={() => history.push("/p/" + user.username)}>
-            <Avatar src={user.avatar || defaultAvatar} />
+            <Avatar src={PF+user.avatar} />
           </MenuItem>
         </Menus>
       </Container>

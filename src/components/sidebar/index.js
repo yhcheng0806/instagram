@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import defaultAvatar from "../../assets/images/defaultAvatar.png";
 
 import * as Actions from "../../context/actions/user";
 
@@ -16,17 +15,19 @@ import {
 } from "./styles";
 
 const Sidebar = ({ history }) => {
+  const PF = "http://localhost:5000/static/"
+  
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state);
   const logout = () => {
-    dispatch(Actions.logout);
+    dispatch(Actions.logout(history));
   };
 
   return (
     <Wrapper>
       <UserInfo>
         <Avatar
-          src={defaultAvatar}
+          src={PF+user.avatar}
           onClick={() => history.push('/p/'+user.username)}
         />
         <div>

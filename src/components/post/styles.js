@@ -11,8 +11,8 @@ export const TopContent = styled.div`
 export const Profile = styled.div`
   ${tw`flex items-center`}
 `;
-export const Avatar = styled.div`
-  ${tw`w-8 h-8 border bg-gray-300 rounded-full	flex mr-3`}
+export const Avatar = styled.img`
+  ${tw`w-8 h-8 border bg-gray-300 rounded-full object-cover	flex mr-3`}
 `;
 
 export const UserInfo = styled.div``;

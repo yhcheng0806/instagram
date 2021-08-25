@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import {
@@ -23,11 +23,13 @@ import {
 import Header from "../../components/common/header";
 import Icon from "../../components/common/icon";
 import * as API from "../../api";
+import { modifyAvatar } from "../../context/actions/user";
 
 const Profile = () => {
-  const PF = "/static/";
+  const PF = "http://localhost:5000/static/";
 
   const state = useSelector((state) => state);
+  const dispatch = useDispatch()
 
   const { username } = useParams();
   const [user, setUser] = useState(null);
@@ -46,6 +48,8 @@ const Profile = () => {
   }, [username]);
 
   const uploadAvatar = async ({ target }) => {
+    if (!target.files.length) return;
+
     const file = target.files[0];
     const fileName = Date.now() + file.name;
     const data = new FormData();
@@ -54,6 +58,7 @@ const Profile = () => {
     await API.upload(data);
     await API.updateUser({ username, avatar: fileName });
     setAvatar(fileName);
+    dispatch(modifyAvatar(fileName))
   };
 
   return (

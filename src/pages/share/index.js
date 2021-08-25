@@ -9,7 +9,6 @@ import Icon from "../../components/common/icon";
 
 import * as API from "../../api";
 
-import defaultAvatar from "../../assets/images/defaultAvatar.png";
 
 import {
   Wrapper,
@@ -39,7 +38,7 @@ import {
 } from "./styles";
 
 const Share = ({ history, ...props }) => {
-  const PF = "/static/"
+  const PF = "http://localhost:5000/static/"
 
   const [formData, setFormData] = useState({
     photos: [],
@@ -131,7 +130,7 @@ const Share = ({ history, ...props }) => {
             </ShareNav>
             <ShareContainer>
               <Panel>
-                <Avatar src={user.avatar || defaultAvatar} />
+                <Avatar src={user.avatar} />
                 <Main>
                   <Textarea
                     placeholder="分享你的趣事"
