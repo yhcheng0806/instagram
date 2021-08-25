@@ -31,7 +31,7 @@ import {
 } from "./styles";
 
 const Post = ({ history, post }) => {
-  const PF = ""
+  const PF = "/static/"
   const [liked, setLiked] = useState(false);
   const [collected, setCollected] = useState(false);
 

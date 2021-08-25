@@ -39,7 +39,7 @@ import {
 } from "./styles";
 
 const Share = ({ history, ...props }) => {
-  const PF = ""
+  const PF = "/static/"
 
   const [formData, setFormData] = useState({
     photos: [],

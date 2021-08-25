@@ -25,7 +25,7 @@ import Icon from "../../components/common/icon";
 import * as API from "../../api";
 
 const Profile = () => {
-  const PF = "";
+  const PF = "/static/";
 
   const state = useSelector((state) => state);
 
