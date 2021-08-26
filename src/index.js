@@ -9,6 +9,7 @@ import { reducers } from "./context";
 
 import "./styles/app.css";
 import "antd/dist/antd.css";
+import 'emoji-mart/css/emoji-mart.css'
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 

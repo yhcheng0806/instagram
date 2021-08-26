@@ -44,6 +44,7 @@ const Timeline = ({ history }) => {
     };
     getPosts();
   }, []);
+  
   return (
     <Wrapper>
       {!posts.length ? (

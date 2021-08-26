@@ -28,7 +28,7 @@ export const Icon = styled.div`
   border: 1px solid #000;
 `;
 export const MainContent = styled.div`
-  ${tw`w-full`}
+  ${tw`w-full relative z-10`}
 `;
 
 export const Photo = styled.div`
@@ -59,16 +59,18 @@ export const Likes = styled.div`
   }
 `;
 export const ThemeContent = styled.div`
-  ${tw`px-4 pb-2`}
+  ${tw`px-4`}
 `;
 
 export const Body = styled.div`
   ${tw`text-gray-800 text-sm`}
 `;
-export const Comments = styled.div``;
+export const Comments = styled.div`
+  ${tw`py-2`}
+`;
 
 export const TotalComment = styled.div`
-  ${tw`py-2 text-gray-400 text-sm`}
+  ${tw`text-gray-400 text-sm`}
   span {
     ${tw`px-2`}
   }
@@ -76,6 +78,9 @@ export const TotalComment = styled.div`
 
 export const Comment = styled.div`
   ${tw` text-xs mb-1 text-gray-800`}
+  &:last-child{
+    ${tw`mb-0`}
+  }
   strong {
     ${tw`font-medium hover:cursor-pointer`}
   }
@@ -83,16 +88,20 @@ export const Comment = styled.div`
     ${tw`px-1`}
   }
   div {
-    ${tw`px-1 inline leading-normal`}
+    ${tw` cursor-pointer px-1 inline leading-normal hover:opacity-75`}
   }
 `;
+
+export const CommentMoreBtn = styled.div`
+${tw`text-xs text-gray-400 mb-2 cursor-pointer `}
+`
 
 export const Time = styled.div`
   ${tw`text-xs text-gray-500`}
 `;
 
 export const Config = styled.div`
-  ${tw`hidden h-14 md:flex items-center px-4`}
+  ${tw`relative hidden h-14 md:flex items-center px-4`}
   >span {
     ${tw`text-xl mr-2`}
   }

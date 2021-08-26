@@ -22,7 +22,7 @@ export const Search = styled.div`
 export const Input = styled.div``;
 
 export const Menus = styled.div`
-  ${tw` fixed left-0 bottom-0 w-full bg-white py-1 justify-around md:py-0 md:w-auto md:justify-start md:relative flex ml-auto md:ml-0`}
+  ${tw` fixed z-50 left-0 bottom-0 w-full bg-white py-1 justify-around md:py-0 md:w-auto md:justify-start md:relative flex ml-auto md:ml-0`}
 `;
 
 export const MenuItem = styled.div`
