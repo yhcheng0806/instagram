@@ -3,12 +3,12 @@ import tw from "twin.macro";
 
 export const Wrapper = styled.div.attrs({
   className:
-    "flex flex-col h-screen  pt-12  items-center bg-white sm:pt-0 sm:justify-center  transition ease-in",
+    "flex flex-col h-screen  pt-12  items-center bg-white md:pt-0 md:justify-center  transition ease-in",
 })``;
 
 export const Container = styled.div`
   ${tw`bg-white rounded p-6 w-full flex flex-col items-center justify-between
-    sm:shadow sm:border sm:border-gray-300 sm:w-96 sm:px-10 sm:pt-10
+    md:shadow md:border md:border-gray-300 md:w-96 md:px-10 md:pt-10
   `}
 `;
 export const Form = styled.div`

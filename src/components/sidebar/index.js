@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import * as Actions from "../../context/actions/user";
+import defaultAvatar from "../../assets/images/defaultAvatar.png";
 
 import {
   Wrapper,
@@ -15,8 +16,8 @@ import {
 } from "./styles";
 
 const Sidebar = ({ history }) => {
-  const PF = "http://localhost:5000/static/"
-  
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state);
   const logout = () => {
@@ -27,11 +28,11 @@ const Sidebar = ({ history }) => {
     <Wrapper>
       <UserInfo>
         <Avatar
-          src={PF+user.avatar}
-          onClick={() => history.push('/p/'+user.username)}
+        src={user.avatar ? PF + user.avatar : defaultAvatar} 
+          onClick={() => history.push("/p/" + user.username)}
         />
         <div>
-          <strong>{ user.username}</strong>
+          <strong>{user.username}</strong>
           <span>instagram</span>
         </div>
         <Button onClick={logout}>退出</Button>

@@ -1,6 +1,6 @@
 import * as API from "../../api";
 import * as ROUTES from "../../constants/routes";
-import { LOGIN, LOGOUT, MODIFY_AVATAR } from "../../constants/actionTypes";
+import { LOGIN, LOGOUT, MODIFY_USERINFO } from "../../constants/actionTypes";
 
 export const login = (formData, err) => async (dispatch) => {
   const res = await API.login(formData);
@@ -23,9 +23,10 @@ export const logout = (history) => {
   return { type: LOGOUT };
 };
 
-export const modifyAvatar = (payload) => {
+export const modifyUserInfo = (payload) => {
   return {
-    type: MODIFY_AVATAR,
+    type: MODIFY_USERINFO,
     payload,
   };
 };
+

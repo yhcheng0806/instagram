@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   border-gray-100 `}
 `;
 export const Container = styled.div`
-  ${tw`w-full px-2 sm:px-0 md:w-4/5 2xl:max-w-screen-lg mx-auto h-full flex items-center`}
+  ${tw`w-full px-2 md:px-0 md:w-4/5 2xl:max-w-screen-lg mx-auto h-full flex items-center`}
 `;
 
 export const Logo = styled.img`
@@ -14,7 +14,7 @@ export const Logo = styled.img`
 `;
 
 export const Search = styled.div`
-  ${tw`sm:flex hidden w-52 mx-auto text-sm text-gray-600 items-center justify-center	 h-7 bg-gray-50 border border-gray-300`}
+  ${tw`md:flex hidden w-52 mx-auto text-sm text-gray-600 items-center justify-center	 h-7 bg-gray-50 border border-gray-300`}
   >span {
     ${tw`mr-2`}
   }
@@ -22,7 +22,7 @@ export const Search = styled.div`
 export const Input = styled.div``;
 
 export const Menus = styled.div`
-  ${tw` fixed left-0 bottom-0 w-full bg-white py-1 justify-around sm:py-0 sm:w-auto sm:justify-start sm:relative flex ml-auto sm:ml-0`}
+  ${tw` fixed left-0 bottom-0 w-full bg-white py-1 justify-around md:py-0 md:w-auto md:justify-start md:relative flex ml-auto md:ml-0`}
 `;
 
 export const MenuItem = styled.div`

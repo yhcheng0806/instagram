@@ -6,9 +6,9 @@ import { LoadingOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import Header from "../../components/common/header";
 import Sidebar from "../../components/sidebar";
 import Icon from "../../components/common/icon";
+import defaultAvatar from "../../assets/images/defaultAvatar.png";
 
 import * as API from "../../api";
-
 
 import {
   Wrapper,
@@ -38,7 +38,7 @@ import {
 } from "./styles";
 
 const Share = ({ history, ...props }) => {
-  const PF = "http://localhost:5000/static/"
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [formData, setFormData] = useState({
     photos: [],
@@ -130,7 +130,7 @@ const Share = ({ history, ...props }) => {
             </ShareNav>
             <ShareContainer>
               <Panel>
-                <Avatar src={user.avatar} />
+                <Avatar src={user.avatar ? PF + user.avatar : defaultAvatar} />
                 <Main>
                   <Textarea
                     placeholder="分享你的趣事"

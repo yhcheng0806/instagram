@@ -17,7 +17,7 @@ export const ShareWrapper = styled.div``;
 
 export const ShareNav = styled.div`
   ${tw`flex bg-white px-4 h-11  items-center 
-justify-between  sm:flex`}
+justify-between  md:flex`}
   >span {
     ${tw`text-xl font-semibold`}
   }
@@ -40,7 +40,7 @@ export const Button = styled.div`
 
 export const ShareContainer = styled.div`
   > div {
-    ${tw`bg-white text-xs sm:text-sm  flex justify-between border-b border-t border-gray-300 mb-3`}
+    ${tw`bg-white text-xs md:text-sm  flex justify-between border-b border-t border-gray-300 mb-3`}
   }
 `;
 
@@ -102,7 +102,7 @@ export const ShareItem = styled.div`
 export const Label = styled.div``;
 
 export const ShareBottom = styled.div`
-  ${tw`hidden justify-end px-4 py-3 bg-white sm:hidden`}
+  ${tw`hidden justify-end px-4 py-3 bg-white md:hidden`}
 `;
 
 export const SubmitBtn = styled.button`
@@ -110,5 +110,5 @@ export const SubmitBtn = styled.button`
 `;
 
 export const RightContent = styled.div`
-  ${tw`hidden sm:block w-1/3`}
+  ${tw`hidden md:block w-1/3`}
 `;

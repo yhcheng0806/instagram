@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -23,13 +25,14 @@ import {
 import Header from "../../components/common/header";
 import Icon from "../../components/common/icon";
 import * as API from "../../api";
-import { modifyAvatar } from "../../context/actions/user";
+import { modifyUserInfo } from "../../context/actions/user";
+import defaultAvatar from "../../assets/images/defaultAvatar.png";
 
 const Profile = () => {
-  const PF = "http://localhost:5000/static/";
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const state = useSelector((state) => state);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { username } = useParams();
   const [user, setUser] = useState(null);
@@ -58,7 +61,7 @@ const Profile = () => {
     await API.upload(data);
     await API.updateUser({ username, avatar: fileName });
     setAvatar(fileName);
-    dispatch(modifyAvatar(fileName))
+    dispatch(modifyUserInfo({ avatar: fileName }));
   };
 
   return (
@@ -68,7 +71,22 @@ const Profile = () => {
         <TopProFileInfo>
           <label htmlFor="file">
             <Avatar>
-              <img src={avatar ? PF + avatar : PF + user?.avatar} alt="" />
+              <div>
+                {!user ? (
+                  <Skeleton circle className="w-full h-full" />
+                ) : (
+                  <img
+                    src={
+                      avatar
+                        ? PF + avatar
+                        : user?.avatar
+                        ? PF + user.avatar
+                        : defaultAvatar
+                    }
+                    alt=""
+                  />
+                )}
+              </div>
             </Avatar>
             {state?.user?.username === user?.username ? (
               <input
@@ -126,19 +144,25 @@ const Profile = () => {
         </TabList>
         <Main>
           <Photos>
-            {posts.map((post) => (
-              <Photo key={post._id} className="group">
-                <Mask>
-                  <FuncItem>
-                    <Icon type="icon-heart-white" />0
-                  </FuncItem>
-                  <FuncItem>
-                    <Icon type="icon-chat-white" />0{" "}
-                  </FuncItem>
-                </Mask>
-                <img src={PF + post.photos[0].src} alt="" />
+            {!posts.length ? (
+              <Photo>
+                <Skeleton className="w-full h-full" />
               </Photo>
-            ))}
+            ) : (
+              posts.map((post) => (
+                <Photo key={post._id} className="group">
+                  <Mask>
+                    <FuncItem>
+                      <Icon type="icon-heart-white" />0
+                    </FuncItem>
+                    <FuncItem>
+                      <Icon type="icon-chat-white" />0{" "}
+                    </FuncItem>
+                  </Mask>
+                  <img src={PF + post.photos[0].src} alt="" />
+                </Photo>
+              ))
+            )}
           </Photos>
         </Main>
       </Container>

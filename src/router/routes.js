@@ -26,6 +26,10 @@ const routes = [
     path: ROUTES.SHARE,
     component: lazy(() => import("../pages/share")),
   },
+  {
+    path: ROUTES.POSTINFO,
+    component: lazy(() => import("../pages/postInfo")),
+  },
 ];
 
 export default routes;

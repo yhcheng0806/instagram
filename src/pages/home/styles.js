@@ -14,5 +14,5 @@ export const LeftContent = styled.div`
 `;
 
 export const RightContent = styled.div`
-  ${tw`hidden sm:block w-1/3`}
+  ${tw`hidden md:block w-1/3`}
 `;

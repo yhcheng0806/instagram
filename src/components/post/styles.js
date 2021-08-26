@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const Wrapper = styled.div`
-  ${tw`sm:rounded sm:border bg-white sm:border-gray-300 sm:mb-6`}
+  ${tw`md:rounded md:border bg-white md:border-gray-300 md:mb-6`}
 `;
 export const TopContent = styled.div`
   ${tw`h-16 p-4 flex items-center justify-between`}
@@ -32,7 +32,7 @@ export const MainContent = styled.div`
 `;
 
 export const Photo = styled.div`
-  ${tw`w-full h-60 sm:h-96 `}
+  ${tw`w-full h-60 md:h-96 `}
   img,video {
     ${tw`w-full h-full object-cover`}
   }
@@ -75,14 +75,15 @@ export const TotalComment = styled.div`
 `;
 
 export const Comment = styled.div`
-  ${tw`flex justify-between text-xs mb-1 text-gray-800`}
-  >div {
-    strong {
-      ${tw`mr-2 font-medium`}
-    }
+  ${tw` text-xs mb-1 text-gray-800`}
+  strong {
+    ${tw`font-medium hover:cursor-pointer`}
   }
-  > span {
-    ${tw`w-3 h-3 bg-gray-200 flex-shrink-0`}
+  label {
+    ${tw`px-1`}
+  }
+  div {
+    ${tw`px-1 inline leading-normal`}
   }
 `;
 
@@ -91,7 +92,7 @@ export const Time = styled.div`
 `;
 
 export const Config = styled.div`
-  ${tw`hidden h-14 sm:flex items-center px-4`}
+  ${tw`hidden h-14 md:flex items-center px-4`}
   >span {
     ${tw`text-xl mr-2`}
   }
@@ -103,4 +104,7 @@ export const Input = styled.input`
 
 export const AddBtn = styled.div`
   ${tw`flex-shrink-0 ml-auto text-blue-200 text-sm ml-4`}
+  &.active {
+    ${tw`text-blue-400 hover:cursor-pointer`}
+  }
 `;
