@@ -46,32 +46,17 @@ const Post = ({ history, post, ...props }) => {
   const [moreState, setMoreState] = useState(false);
   const [toInfo, setToInfo] = useState({
     placeholder: "",
-    userId: "",
-    username: "",
-    avatar: "",
+    _id: "",
   });
   const [postUser, setPostUser] = useState({});
   const [collected, setCollected] = useState(false);
 
   useEffect(() => {
-    const getMsgs = async () => {
-      const res = await API.getMsgList(post._id);
-      setMsgs(
-        res.sort((m1, m2) => new Date(m2.createdAt) - new Date(m1.createdAt))
-      );
-      setToInfo({
-        placeholder: "",
-        userId: user._id,
-        username: user.username,
-        avatar: user.avatar,
-      });
-    };
     const getUser = async () => {
       const res = await API.getUser(post.userId);
       setPostUser(res);
     };
-
-    getMsgs();
+    setMsgs(post.msgList);
     getUser();
   }, [post, user]);
 
@@ -81,13 +66,11 @@ const Post = ({ history, post, ...props }) => {
     setLikes(liked ? likes - 1 : likes + 1);
   };
 
-  const focusMsgInfo = ({ userId, username, name, avatar }) => {
+  const focusMsgInfo = ({ _id, username }) => {
+    console.log(user._id, _id);
     setToInfo({
-      placeholder: userId === user._id ? "" : `回复 ${username}`,
-      userId,
-      username,
-      name,
-      avatar,
+      placeholder: _id === user._id ? "" : `回复 ${username}`,
+      _id,
     });
     setMsg("");
   };
@@ -95,26 +78,17 @@ const Post = ({ history, post, ...props }) => {
   const send = async () => {
     if (!msg) return;
 
-    const res = await API.sendMsg({
+    const msgItem = await API.sendMsg({
       postId: post._id,
       from: user._id,
-      to: toInfo.userId,
+      to: toInfo._id || user._id,
       msg,
     });
-    const msgItem = {
-      ...res,
-      from: {
-        username: user.username,
-        name: user.name,
-        userId: user._id,
-        avatar: user.avatar,
-      },
-      to: toInfo,
-    };
 
     setMsgs([msgItem, ...msgs]);
 
     setMsg("");
+    setToInfo({ placeholder: "", _id: "" });
     // getMsgs();
   };
 
@@ -199,20 +173,24 @@ const Post = ({ history, post, ...props }) => {
                 </TotalComment>
                 {msgs.slice(0, moreState ? msgs.length : 3).map((msg) => (
                   <Comment key={msg._id}>
-                    <strong onClick={() => toProfilePage(msg.from.username)}>
-                      {msg.from.username}
+                    <strong
+                      onClick={() => toProfilePage(msg.fromUser.username)}
+                    >
+                      {msg.fromUser.username}
                     </strong>
-                    {msg.from.userId !== msg.to.userId ? (
+                    {msg.fromUser._id !== msg.toUser._id ? (
                       <>
                         <label>回复</label>
-                        <strong onClick={() => toProfilePage(msg.to.username)}>
-                          {msg.to.username}
+                        <strong
+                          onClick={() => toProfilePage(msg.toUser.username)}
+                        >
+                          {msg.toUser.username}
                         </strong>
                       </>
                     ) : null}
                     <div
                       onClick={() => {
-                        focusMsgInfo(msg.from);
+                        focusMsgInfo(msg.fromUser);
                       }}
                     >
                       {msg.msg}
