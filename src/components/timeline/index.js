@@ -38,13 +38,20 @@ const Timeline = ({ history }) => {
   useEffect(() => {
     const getPosts = async () => {
       const res = await API.getPosts();
-      setPosts(
-        res.sort((p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt))
+      const reslut = res.sort(
+        (p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt)
       );
+      reslut.map((v) => {
+        v.msgList = v?.msgList.sort(
+          (p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt)
+        );
+        return v;
+      });
+      setPosts(reslut);
     };
     getPosts();
   }, []);
-  
+
   return (
     <Wrapper>
       {!posts.length ? (

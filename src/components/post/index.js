@@ -42,23 +42,17 @@ const Post = ({ history, post, ...props }) => {
   const [liked, setLiked] = useState(post.likes.includes(user._id));
   const [likes, setLikes] = useState(post.likes.length);
   const [msgs, setMsgs] = useState([]);
-  const [msg, setMsg] = useState("");
+  const [msgContent, setMsgContent] = useState("");
   const [moreState, setMoreState] = useState(false);
   const [toInfo, setToInfo] = useState({
     placeholder: "",
     _id: "",
   });
-  const [postUser, setPostUser] = useState({});
   const [collected, setCollected] = useState(false);
 
   useEffect(() => {
-    const getUser = async () => {
-      const res = await API.getUser(post.userId);
-      setPostUser(res);
-    };
     setMsgs(post.msgList);
-    getUser();
-  }, [post, user]);
+  }, [post]);
 
   const handlLike = async () => {
     await API.likePost(post._id, { userId: user._id });
@@ -72,22 +66,22 @@ const Post = ({ history, post, ...props }) => {
       placeholder: _id === user._id ? "" : `回复 ${username}`,
       _id,
     });
-    setMsg("");
+    setMsgContent("");
   };
 
   const send = async () => {
-    if (!msg) return;
+    if (!msgContent) return;
 
     const msgItem = await API.sendMsg({
       postId: post._id,
       from: user._id,
       to: toInfo._id || user._id,
-      msg,
+      msg:msgContent,
     });
 
     setMsgs([msgItem, ...msgs]);
 
-    setMsg("");
+    setMsgContent("");
     setToInfo({ placeholder: "", _id: "" });
     // getMsgs();
   };
@@ -102,7 +96,7 @@ const Post = ({ history, post, ...props }) => {
 
   const addEmoji = (emoji) => {
     console.log(emoji);
-    setMsg(msg + emoji.native);
+    setMsgContent(msgContent + emoji.native);
   };
 
   const menu = (
@@ -120,11 +114,11 @@ const Post = ({ history, post, ...props }) => {
       <TopContent>
         <Profile>
           <Avatar
-            src={postUser.avatar ? PF + postUser.avatar : defaultAvatar}
-            onClick={() => history.push("/p/" + postUser.username)}
+            src={post.userInfo.avatar ? PF + post.userInfo.avatar : defaultAvatar}
+            onClick={() => history.push("/p/" + post.userInfo.username)}
           />
           <UserInfo>
-            <Name>{postUser.name || postUser.username}</Name>
+            <Name>{post.userInfo.name || post.userInfo.username}</Name>
             <Other>Daejeon, South Korea</Other>
           </UserInfo>
         </Profile>
@@ -171,20 +165,20 @@ const Post = ({ history, post, ...props }) => {
                 <TotalComment>
                   全部<span>{msgs.length}</span>条评论
                 </TotalComment>
-                {msgs.slice(0, moreState ? msgs.length : 3).map((msg) => (
-                  <Comment key={msg._id}>
+                {msgs.slice(0, moreState ? msgs.length : 3).map((msg,i) => (
+                  <Comment key={i}>
                     <strong
-                      onClick={() => toProfilePage(msg.fromUser.username)}
+                      onClick={() => toProfilePage(msg?.fromUser?.username)}
                     >
-                      {msg.fromUser.username}
+                      {msg?.fromUser?.username}
                     </strong>
                     {msg.fromUser._id !== msg.toUser._id ? (
                       <>
                         <label>回复</label>
                         <strong
-                          onClick={() => toProfilePage(msg.toUser.username)}
+                          onClick={() => toProfilePage(msg?.toUser?.username)}
                         >
-                          {msg.toUser.username}
+                          {msg?.toUser?.username}
                         </strong>
                       </>
                     ) : null}
@@ -220,13 +214,13 @@ const Post = ({ history, post, ...props }) => {
             <Icon type="icon-emoji" onClick={(e) => e.preventDefault()} />
           </Dropdown>
           <Input
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
+            value={msgContent}
+            onChange={(e) => setMsgContent(e.target.value)}
             placeholder={
               toInfo.placeholder ? toInfo.placeholder : "添加评论..."
             }
           />
-          <AddBtn className={msg && "active"} onClick={send}>
+          <AddBtn className={msgContent && "active"} onClick={send}>
             发布
           </AddBtn>
         </Config>
