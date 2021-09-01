@@ -28,7 +28,7 @@ export const Icon = styled.div`
   border: 1px solid #000;
 `;
 export const MainContent = styled.div`
-  ${tw`w-full relative z-10`}
+  ${tw``}
 `;
 
 export const Photo = styled.div`
@@ -103,7 +103,7 @@ export const Time = styled.div`
 export const Config = styled.div`
   ${tw`relative hidden h-14 md:flex items-center px-4`}
   >span {
-    ${tw`text-xl mr-2`}
+    ${tw`flex items-center justify-center text-xl mr-2`}
   }
 `;
 

@@ -165,8 +165,8 @@ const Post = ({ history, post, ...props }) => {
                 <TotalComment>
                   全部<span>{msgs.length}</span>条评论
                 </TotalComment>
-                {msgs.slice(0, moreState ? msgs.length : 3).map((msg,i) => (
-                  <Comment key={i}>
+                {msgs.slice(0, moreState ? msgs.length : 3).map((msg) => (
+                  <Comment key={msg._id}>
                     <strong
                       onClick={() => toProfilePage(msg?.fromUser?.username)}
                     >
