@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const Wrapper = styled.div`
-  ${tw`h-14 w-full bg-white relative md:sticky top-0 shadow border-b 
+  ${tw`h-14 w-full bg-white sticky top-0 shadow border-b 
   border-gray-100 z-50 `}
 `;
 export const Container = styled.div`

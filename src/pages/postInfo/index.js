@@ -171,6 +171,21 @@ const PostInfo = ({ history }) => {
             </TopContent>
             <MainContent>
               <Comments>
+                <Comment>
+                  <Avatar
+                    src={
+                      post.userInfo?.avatar
+                        ? PF + post.userInfo?.avatar
+                        : defaultAvatar
+                    }
+                  ></Avatar>
+                  <CommentBody>
+                    <CommentText>
+                      <strong>{post.userInfo?.username}</strong>
+                      <span onClick={() => focusMsgInfo(post.userInfo)}>{post.desc}</span>
+                    </CommentText>
+                  </CommentBody>
+                </Comment>
                 {post.msgList?.map((msg) => (
                   <Comment key={msg._id}>
                     <Avatar
