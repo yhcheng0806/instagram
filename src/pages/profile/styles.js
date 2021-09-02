@@ -39,7 +39,12 @@ export const Name = styled.div`
   }
 `;
 
-export const Button = styled.div``;
+export const Button = styled.div`
+  ${tw`cursor-pointer tracking-widest	text-base ml-5 w-20 h-8 rounded-sm shadow-md bg-blue-400 text-white  flex items-center justify-center`}
+  &.empty {
+    ${tw`shadow-none	 border border-gray-400 bg-transparent text-black`}
+  }
+`;
 
 export const Icon = styled.div``;
 

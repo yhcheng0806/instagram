@@ -189,6 +189,9 @@ const PostInfo = ({ history }) => {
                 {post.msgList?.map((msg) => (
                   <Comment key={msg._id}>
                     <Avatar
+                      onClick={() =>
+                        toProfilePage(msg?.fromUser?.username)
+                      }
                       src={
                         msg.fromUser?.avatar
                           ? PF + msg.fromUser.avatar
@@ -197,7 +200,9 @@ const PostInfo = ({ history }) => {
                     ></Avatar>
                     <CommentBody>
                       <CommentText>
-                        <strong>{msg.fromUser.username}</strong>
+                        <strong onClick={() =>
+                          toProfilePage(msg?.fromUser?.username)
+                        }>{msg.fromUser.username}</strong>
                         {msg.fromUser._id !== msg.toUser._id ? (
                           <>
                             <label>回复</label>
@@ -225,9 +230,8 @@ const PostInfo = ({ history }) => {
                       </CommentStatus>
                     </CommentBody>
                     <Icon
-                      type={`icon-heart${
-                        msg.likes.includes(user._id) ? "-active" : ""
-                      }`}
+                      type={`icon-heart${msg.likes.includes(user._id) ? "-active" : ""
+                        }`}
                       onClick={() => handleItemLike(msg)}
                     />
                   </Comment>

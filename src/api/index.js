@@ -45,6 +45,7 @@ export const likeMsg = (msgId, data) => API.put(`msgs/like/${msgId}`, data);
 
 export const getUser = (userId) => API.get(`users/${userId}`);
 export const updateUser = (data) => API.post("users/update", data);
+export const followUser = (userId, data) => API.post(`users/follow/${userId}`, data)
 
 export const getPosts = () => API.get("posts");
 export const getPost = (postId) => API.get(`posts/${postId}`);

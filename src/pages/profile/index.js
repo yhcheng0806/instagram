@@ -11,6 +11,7 @@ import {
   Avatar,
   InfoBox,
   Name,
+  Button,
   Status,
   Account,
   TabList,
@@ -25,27 +26,31 @@ import {
 import Header from "../../components/common/header";
 import Icon from "../../components/common/icon";
 import * as API from "../../api";
-import { modifyUserInfo } from "../../context/actions/user";
+import * as ACTION from "../../context/actions/user";
 import defaultAvatar from "../../assets/images/defaultAvatar.png";
 
 const Profile = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const state = useSelector((state) => state);
+  const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const { username } = useParams();
-  const [user, setUser] = useState(null);
+  const [profileInfo, setProfileInfo] = useState(null);
   const [posts, setPosts] = useState([]);
   const [avatar, setAvatar] = useState("");
+  const [followState,setFollowState] = useState(false)
 
   useEffect(() => {
     const getUser = async () => {
-      setUser(await API.getUser(username));
+      const userRes = await API.getUser(username)
+      setProfileInfo(userRes);
       const res = await API.getSelfPosts({ username });
       setPosts(
         res.sort((p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt))
       );
+
+      setFollowState(user.following?.includes(userRes._id))
     };
     getUser();
   }, [username]);
@@ -61,8 +66,14 @@ const Profile = () => {
     await API.upload(data);
     await API.updateUser({ username, avatar: fileName });
     setAvatar(fileName);
-    dispatch(modifyUserInfo({ avatar: fileName }));
+    dispatch(ACTION.modifyUserInfo({ avatar: fileName }));
   };
+
+  const handleFollow = async () => {
+    await API[followState? 'unfollowUser':'followUser'](profileInfo._id,{userId:user._id})
+    dispatch(ACTION[followState? 'unfollowUser':'followUser'](profileInfo._id))
+    setFollowState(!followState)
+  }
 
   return (
     <Wrapper>
@@ -72,23 +83,23 @@ const Profile = () => {
           <label htmlFor="file">
             <Avatar>
               <div>
-                {!user ? (
+                {!profileInfo ? (
                   <Skeleton circle className="w-full h-full" />
                 ) : (
                   <img
                     src={
                       avatar
                         ? PF + avatar
-                        : user?.avatar
-                        ? PF + user.avatar
-                        : defaultAvatar
+                        : profileInfo?.avatar
+                          ? PF + profileInfo.avatar
+                          : defaultAvatar
                     }
                     alt=""
                   />
                 )}
               </div>
             </Avatar>
-            {state?.user?.username === user?.username ? (
+            {user?.username === profileInfo?.username ? (
               <input
                 style={{ display: "none" }}
                 type="file"
@@ -101,8 +112,11 @@ const Profile = () => {
 
           <InfoBox>
             <Name>
-              <span>{user?.username}</span>
-              {/* <Button>发消息</Button> */}
+              <span>{profileInfo?.username}</span>
+              {
+                profileInfo?.username !== user?.username ? <Button className={followState && 'empty'} onClick={handleFollow}>{followState ? '取关':'关注'}</Button> : null
+              }
+              {/* <Button className="empty">取关</Button> */}
               {/* <Button>
                 <Icon />
               </Button>
@@ -114,11 +128,11 @@ const Profile = () => {
                 <strong> 篇帖子</strong>
               </span>
               <span>
-                {user?.followers.length}
+                {profileInfo?.followers.length}
                 <strong> 粉丝</strong>
               </span>
               <span>
-                <strong>正在关注 </strong> {user?.following.length}
+                <strong>正在关注 </strong> {profileInfo?.following.length}
               </span>
             </Status>
             <Account>instagram</Account>
