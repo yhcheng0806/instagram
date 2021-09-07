@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
+import PullToRefresh from 'rmc-pull-updown-to-refresh';
 
 import { format } from "timeago.js";
 import { Carousel, Dropdown } from "antd";
@@ -61,7 +62,7 @@ const PostInfo = ({ history }) => {
     );
 
     setPost(result);
-    setLiked(result.likes.includes(user._id));
+    setLiked(result.likes.includes(user?._id));
     setLikes(result.likes.length);
   };
 
@@ -70,15 +71,15 @@ const PostInfo = ({ history }) => {
   }, [postId]);
 
   const handlLike = async () => {
-    await API.likePost(post._id, { userId: user._id });
+    await API.likePost(post._id, { userId: user?._id });
     setLiked(!liked);
     setLikes(liked ? likes - 1 : likes + 1);
   };
 
   const focusMsgInfo = ({ _id, username }) => {
-    console.log(user._id, _id);
+    console.log(user?._id, _id);
     setToInfo({
-      placeholder: _id === user._id ? "" : `回复 ${username}`,
+      placeholder: _id === user?._id ? "" : `回复 ${username}`,
       _id,
     });
     setMsgContent("");
@@ -89,8 +90,8 @@ const PostInfo = ({ history }) => {
 
     const msgItem = await API.sendMsg({
       postId: post._id,
-      from: user._id,
-      to: toInfo._id || user._id,
+      from: user?._id,
+      to: toInfo._id || user?._id,
       msg: msgContent,
     });
 
@@ -114,7 +115,7 @@ const PostInfo = ({ history }) => {
   };
 
   const handleItemLike = async (item) => {
-    await API.likeMsg(item._id, { userId: user._id });
+    await API.likeMsg(item._id, { userId: user?._id });
     getPost();
   };
 
@@ -127,158 +128,166 @@ const PostInfo = ({ history }) => {
     </div>
   );
 
+  const onPullUp = () => { }
+
+  const onPullDown = () => {
+    getPost()
+  }
+
   return (
     <Wrapper>
       <Header />
       <Container>
-        <PostWrapper>
-          <PostLeft>
-            <Carousel>
-              {post.photos?.map((photo) => (
-                <Photo key={photo.src}>
-                  {photo.isImg ? (
-                    <img src={PF + photo.src} alt="" />
-                  ) : (
-                    <video src={PF + photo.src} controls></video>
-                  )}
-                </Photo>
-              ))}
-            </Carousel>
-          </PostLeft>
-          <PostRight>
-            <TopContent>
-              <Profile>
-                <Avatar
-                  src={
-                    post.userInfo?.avatar
-                      ? PF + post.userInfo.avatar
-                      : defaultAvatar
-                  }
-                  onClick={() => history.push("/p/" + post.userInfo.username)}
-                />
-                <UserInfo>
-                  <Name>{post.userInfo?.name || post.userInfo?.username}</Name>
-                  <Other>Daejeon, South Korea</Other>
-                </UserInfo>
-              </Profile>
-              <Dropdown
-                overlay={menu}
-                placement="bottomRight"
-                trigger={["click"]}
-              >
-                <Icon type="icon-more" onClick={(e) => e.preventDefault()} />
-              </Dropdown>
-            </TopContent>
-            <MainContent>
-              <Comments>
-                <Comment>
+        <PullToRefresh onPullDown={onPullDown} onPullUp={onPullUp}>
+          <PostWrapper>
+            <PostLeft>
+              <Carousel>
+                {post.photos?.map((photo) => (
+                  <Photo key={photo.src}>
+                    {photo.isImg ? (
+                      <img src={PF + photo.src} alt="" />
+                    ) : (
+                      <video src={PF + photo.src} controls></video>
+                    )}
+                  </Photo>
+                ))}
+              </Carousel>
+            </PostLeft>
+            <PostRight>
+              <TopContent>
+                <Profile>
                   <Avatar
                     src={
                       post.userInfo?.avatar
-                        ? PF + post.userInfo?.avatar
+                        ? PF + post.userInfo.avatar
                         : defaultAvatar
                     }
-                  ></Avatar>
-                  <CommentBody>
-                    <CommentText>
-                      <strong>{post.userInfo?.username}</strong>
-                      <span onClick={() => focusMsgInfo(post.userInfo)}>{post.desc}</span>
-                    </CommentText>
-                  </CommentBody>
-                </Comment>
-                {post.msgList?.map((msg) => (
-                  <Comment key={msg._id}>
+                    onClick={() => history.push("/p/" + post.userInfo.username)}
+                  />
+                  <UserInfo>
+                    <Name>{post.userInfo?.name || post.userInfo?.username}</Name>
+                    <Other>Daejeon, South Korea</Other>
+                  </UserInfo>
+                </Profile>
+                <Dropdown
+                  overlay={menu}
+                  placement="bottomRight"
+                  trigger={["click"]}
+                >
+                  <Icon type="icon-more" onClick={(e) => e.preventDefault()} />
+                </Dropdown>
+              </TopContent>
+              <MainContent>
+                <Comments>
+                  <Comment>
                     <Avatar
-                      onClick={() =>
-                        toProfilePage(msg?.fromUser?.username)
-                      }
                       src={
-                        msg.fromUser?.avatar
-                          ? PF + msg.fromUser.avatar
+                        post.userInfo?.avatar
+                          ? PF + post.userInfo?.avatar
                           : defaultAvatar
                       }
                     ></Avatar>
                     <CommentBody>
                       <CommentText>
-                        <strong onClick={() =>
-                          toProfilePage(msg?.fromUser?.username)
-                        }>{msg.fromUser.username}</strong>
-                        {msg.fromUser._id !== msg.toUser._id ? (
-                          <>
-                            <label>回复</label>
-                            <strong
-                              onClick={() =>
-                                toProfilePage(msg?.toUser?.username)
-                              }
-                            >
-                              {msg?.toUser?.username}
-                            </strong>
-                          </>
-                        ) : null}
-                        <span onClick={() => focusMsgInfo(msg.fromUser)}>
-                          {msg.msg}
-                        </span>
+                        <strong>{post.userInfo?.username}</strong>
+                        <span onClick={() => focusMsgInfo(post.userInfo)}>{post.desc}</span>
                       </CommentText>
-                      <CommentStatus>
-                        <div>{format(msg.createdAt, "zh_CN")}</div>
-                        <div>
-                          <span>{msg.likes.length}</span>次赞
-                        </div>
-                        <div onClick={() => focusMsgInfo(msg.fromUser)}>
-                          回复
-                        </div>
-                      </CommentStatus>
                     </CommentBody>
-                    <Icon
-                      type={`icon-heart${msg.likes.includes(user._id) ? "-active" : ""
-                        }`}
-                      onClick={() => handleItemLike(msg)}
-                    />
                   </Comment>
-                ))}
-              </Comments>
-            </MainContent>
-            <BottomContent>
-              <Actions>
-                <Status>
+                  {post.msgList?.map((msg) => (
+                    <Comment key={msg._id}>
+                      <Avatar
+                        onClick={() =>
+                          toProfilePage(msg?.fromUser?.username)
+                        }
+                        src={
+                          msg.fromUser?.avatar
+                            ? PF + msg.fromUser.avatar
+                            : defaultAvatar
+                        }
+                      ></Avatar>
+                      <CommentBody>
+                        <CommentText>
+                          <strong onClick={() =>
+                            toProfilePage(msg?.fromUser?.username)
+                          }>{msg.fromUser.username}</strong>
+                          {msg.fromUser._id !== msg.toUser._id ? (
+                            <>
+                              <label>回复</label>
+                              <strong
+                                onClick={() =>
+                                  toProfilePage(msg?.toUser?.username)
+                                }
+                              >
+                                {msg?.toUser?.username}
+                              </strong>
+                            </>
+                          ) : null}
+                          <span onClick={() => focusMsgInfo(msg.fromUser)}>
+                            {msg.msg}
+                          </span>
+                        </CommentText>
+                        <CommentStatus>
+                          <div>{format(msg.createdAt, "zh_CN")}</div>
+                          <div>
+                            <span>{msg.likes.length}</span>次赞
+                          </div>
+                          <div onClick={() => focusMsgInfo(msg.fromUser)}>
+                            回复
+                          </div>
+                        </CommentStatus>
+                      </CommentBody>
+                      <Icon
+                        type={`icon-heart${msg.likes.includes(user?._id) ? "-active" : ""
+                          }`}
+                        onClick={() => handleItemLike(msg)}
+                      />
+                    </Comment>
+                  ))}
+                </Comments>
+              </MainContent>
+              <BottomContent>
+                <Actions>
+                  <Status>
+                    <Icon
+                      type={`icon-heart${liked ? "-active" : ""}`}
+                      onClick={handlLike}
+                    />
+                    <Icon type="icon-chat" />
+                    <Icon type="icon-plane" />
+                  </Status>
                   <Icon
-                    type={`icon-heart${liked ? "-active" : ""}`}
-                    onClick={handlLike}
+                    type={`icon-bookmark${collected ? "-active" : ""}`}
+                    onClick={() => setCollected(!collected)}
                   />
-                  <Icon type="icon-chat" />
-                  <Icon type="icon-plane" />
-                </Status>
-                <Icon
-                  type={`icon-bookmark${collected ? "-active" : ""}`}
-                  onClick={() => setCollected(!collected)}
-                />
-              </Actions>
-              <Likes>
-                <span>{likes}</span>次赞
-              </Likes>
-              <Time>{format(post.createdAt, "zh_CN")}</Time>
-              <Config>
-                <Dropdown
-                  overlay={<Picker onSelect={addEmoji} sheetSize={32} />}
-                  placement="bottomRight"
-                  trigger={["click"]}
-                >
-                  <Icon type="icon-emoji" onClick={(e) => e.preventDefault()} />
-                </Dropdown>
-                <Input
-                  value={msgContent}
-                  onChange={(e) => setMsgContent(e.target.value)}
-                  placeholder={
-                    toInfo.placeholder ? toInfo.placeholder : "添加评论..."
-                  }
-                />
-                <AddBtn className={msgContent && "active"} onClick={send}>
-                  发布
-                </AddBtn>
-              </Config>
-            </BottomContent>
-          </PostRight>
-        </PostWrapper>
+                </Actions>
+                <Likes>
+                  <span>{likes}</span>次赞
+                </Likes>
+                <Time>{format(post.createdAt, "zh_CN")}</Time>
+                <Config>
+                  <Dropdown
+                    overlay={<Picker onSelect={addEmoji} sheetSize={32} />}
+                    placement="bottomRight"
+                    trigger={["click"]}
+                  >
+                    <Icon type="icon-emoji" onClick={(e) => e.preventDefault()} />
+                  </Dropdown>
+                  <Input
+                    value={msgContent}
+                    onChange={(e) => setMsgContent(e.target.value)}
+                    placeholder={
+                      toInfo.placeholder ? toInfo.placeholder : "添加评论..."
+                    }
+                  />
+                  <AddBtn className={msgContent && "active"} onClick={send}>
+                    发布
+                  </AddBtn>
+                </Config>
+              </BottomContent>
+            </PostRight>
+          </PostWrapper>
+        </PullToRefresh>
       </Container>
     </Wrapper>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
+import PullToRefresh from 'rmc-pull-updown-to-refresh';
 
 import * as API from "../../api";
 import Post from "../post";
@@ -35,33 +36,44 @@ const PostSkeelton = ({ count }) => {
 
 const Timeline = ({ history }) => {
   const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    const getPosts = async () => {
-      const res = await API.getPosts();
-      const reslut = res.sort(
+
+  const getPosts = async () => {
+    const res = await API.getPosts();
+    const reslut = res.sort(
+      (p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt)
+    );
+    reslut.map((v) => {
+      v.msgList = v?.msgList.sort(
         (p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt)
       );
-      reslut.map((v) => {
-        v.msgList = v?.msgList.sort(
-          (p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt)
-        );
-        return v;
-      });
-      setPosts(reslut);
-    };
+      return v;
+    });
+    setPosts(reslut);
+  };
+
+  useEffect(() => {
     getPosts();
   }, []);
 
+  const onPullUp = () => {
+  }
+
+  const onPullDown = () => {
+    getPosts()
+  }
+
   return (
-    <Wrapper>
-      {!posts.length ? (
-        <PostSkeelton count={2} />
-      ) : (
-        posts.map((post) => (
-          <Post key={post._id} post={post} history={history} />
-        ))
-      )}
-    </Wrapper>
+    <PullToRefresh onPullDown={onPullDown} onPullUp={onPullUp}>
+      <Wrapper>
+        {!posts.length ? (
+          <PostSkeelton count={2} />
+        ) : (
+          posts.map((post) => (
+            <Post key={post._id} post={post} history={history} />
+          ))
+        )}
+      </Wrapper>
+    </PullToRefresh>
   );
 };
 
